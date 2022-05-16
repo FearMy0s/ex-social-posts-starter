@@ -67,24 +67,27 @@ for (let i = 0; i < posts.length; i++) {
     post.querySelector(".likes__counter b").innerHTML = posts[i].likes;
     container.append(post);
 };
+const Postliked = [];
 const buttonlike =document.querySelector("#likebutton");
-const likeBtn = document.querySelectorAll(".like-button")
-const totalike = document.querySelectorAll(".js-likes-counter")
+const likeBtn = document.querySelectorAll(".like-button");
+const totalike = document.querySelectorAll(".js-likes-counter");
 
 for (let i = 0; i < likeBtn.length; i++) {
     likeBtn[i].addEventListener("click", function(){
-        if(this.classList.contains("like-button--liked")){
-            this.classList.remove("like-button--liked")
-            let count =totalike[this.id-1].innerHTML;
-            count--;
-            totalike[this.id-1].innerHTML = count;
+        if(likeBtn[i].classList.contains("like-button--liked")){
+            likeBtn[i].classList.remove("like-button--liked")
+            //let count =totalike[posts[i].likes].innerHTML;
+            //count--;
+            //totalike[this.id-1].innerHTML = count;
+            posts[i].likes -=1
+            totalike[i].innerHTML = posts[i].likes
         } else {
             this.classList.add("like-button--liked");
-            let count =totalike[this.id-1].innerHTML;
-            count++;
-            totalike[this.id-1].innerHTML = count;
+            Postliked.push(posts[i].id)
+            posts[i].likes +=1
+            totalike[i].innerHTML = posts[i].likes
+
         }
     })
-    
 }
 
